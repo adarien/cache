@@ -1,29 +1,27 @@
 package cache
 
-type MyMap map[string]interface{}
-
-type MapStruct struct {
-	myMap MyMap
+type Cache struct {
+	currentCache map[string]interface{}
 }
 
-func initMap() *MapStruct {
-	var m MapStruct
-	m.myMap = make(map[string]interface{})
-	return &m
+func New() *Cache {
+	return &Cache{
+		currentCache: make(map[string]interface{}),
+	}
 }
 
-func New() MapStruct {
-	return *initMap()
+func (m *Cache) Set(key string, value interface{}) {
+	m.currentCache[key] = value
 }
 
-func (m *MapStruct) Set(key string, value interface{}) {
-	m.myMap[key] = value
+func (m *Cache) Delete(key string) {
+	delete(m.currentCache, key)
 }
 
-func (m *MapStruct) Delete(key string) {
-	delete(m.myMap, key)
-}
-
-func (m MapStruct) Get(key string) interface{} {
-	return m.myMap[key]
+func (m Cache) Get(key string) interface{} {
+	value, exists := m.currentCache[key]
+	if exists {
+		return value
+	}
+	return "key not found"
 }
