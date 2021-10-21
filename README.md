@@ -15,12 +15,22 @@ func main() {
 	cache.Set("userStatus", true)
 	fmt.Println(cache)
 
-	userID := cache.Get("userID")
-	fmt.Println(userID)
+	userID, err := cache.Get("userID")
+	if err != nil {
+	    fmt.Println(err)
+	} else {
+	    fmt.Println(userID)
+	}
 
 	cache.Delete("userID")
-	userID = cache.Get("userID")
-	fmt.Println(userID)
+	
+	userID, err := cache.Get("userID")
+	if err != nil {
+	    fmt.Println(err)
+	} else {
+	    fmt.Println(userID)
+	}
+	
 	fmt.Println(cache)
 }
 ```
