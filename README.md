@@ -24,7 +24,7 @@ func main() {
 
 	cache.Delete("userID")
 	
-	userID, err := cache.Get("userID")
+	userID, err = cache.Get("userID")
 	if err != nil {
 	    fmt.Println(err)
 	} else {
